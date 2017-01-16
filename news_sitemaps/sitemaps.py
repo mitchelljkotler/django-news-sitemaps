@@ -63,9 +63,9 @@ class NewsSitemap(Sitemap):
         For example, "NASDAQ:AMAT" (but not "NASD:AMAT"), or "BOM:500325" (but not "BOM:RIL").
         """
     
-    def get_urls(self, page=1):
+    def get_urls(self, request, page=1):
         from django.contrib.sites.models import Site
-        domain = Site.objects.get_current().domain
+        domain = Site.objects.get_current(request).domain
         get = self._Sitemap__get
 
         for item in self.paginator.page(page).object_list:
