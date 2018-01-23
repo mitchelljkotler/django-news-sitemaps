@@ -2,6 +2,7 @@ import datetime
 from django.contrib.sitemaps import Sitemap
 
 class NewsSitemap(Sitemap):
+    protocol = 'https'
     def genres(self, obj):
         """
         Returns a comma-separated list of properties characterizing the content of the article,
@@ -74,7 +75,7 @@ class NewsSitemap(Sitemap):
                 lastmod = lastmod.replace(microsecond=0)
 
             yield {
-                'location':     "http://%s%s" % (domain, get('location', item)),
+                'location':     "%s://%s%s" % (self.protocol, domain, get('location', item)),
                 'lastmod':      lastmod,
                 'changefreq':   get('changefreq', item, None),
                 'priority':     get('priority', item, None),
